@@ -7,7 +7,7 @@ if ($data) {
     $barang['harga'] = $data['harga_barang'];
     $barang['stok'] = $data['stok_barang'];
     $barang['kadaluarsa'] = $data['kadaluarsa'];
-    $gambar['gambar'] = $data['gambar'];
+    $barang['gambar'] = $data['gambar'];
 }
 ?>
 
@@ -20,7 +20,7 @@ if ($data) {
         <?php endif; ?>
         <form class="space-y-4" action="<?= BASEURL . '/barang/edit_barang'; ?>" method="POST" id="form" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $barang['id'] ?>">
-            <input type="hidden" name="mode" id="mode" value="update">
+            <input type="hidden" name="mode" id="mode" value="update">  
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <label for="kode_barang">Kode Barang: </label>
@@ -55,7 +55,8 @@ if ($data) {
             </div>
             <div class="w-full mx-auto">
                 <label for="gambar">Upload Gambar Barang: </label>
-                <input type="text" class="input-file max-w-full flex mt-1" id="gambar" name="gambar" value="<?= $gambar['gambar'] ?>" />
+                <img src="<?= BASEURL . '/public/images/barang/' . $barang['gambar'] ?>" style="width: 115px;">
+                <input type="file" class="input-file max-w-full flex mt-1" id="gambar" name="gambar" value="<?= $barang['gambar'] ?>" />
             </div>
 
             <div class="mt-4">

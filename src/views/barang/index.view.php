@@ -27,7 +27,7 @@ Message::flash();
                         <td><img src="<?= BASEURL . '/public/images/barang/'. htmlspecialchars($row['gambar']); ?>" alt="<?= htmlspecialchars($row['nama']); ?>" style="width: 115px;"></td>
                         <td>
                             <a href="<?= BASEURL . "/barang/edit" . '/' . $row['id'] ?>"><button class="btn btn-solid-warning"><i class="fa-regular fa-pen-to-square"></i></button></a> 
-                            <a href="/barang/delete"><button class="btn btn-solid-error"><i class="fa-regular fa-trash-can"></i></button></a>
+                            <a href="<?= BASEURL . "/barang/delete" . '/' . $row['id'] ?>"><button class="btn btn-solid-error"><i class="fa-regular fa-trash-can"></i></button></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

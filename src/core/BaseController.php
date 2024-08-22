@@ -34,14 +34,18 @@ class BaseController extends Filter
         echo '</pre>';
     }
 
-    public function upload()
+    public function upload($field_name = 'gambar')
     {
-        $file = $_FILES['gambar'];
+        if (!isset($_FILES[$field_name])) {
+            echo "<script>alert('File tidak ditemukan');</script>";
+            return false;
+        }
+
+        $file = $_FILES[$field_name];
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $fileSize = $file['size'];
         $fileError = $file['error'];
-        $fileType = $file['type'];
 
         // Pisahkan nama file dan ekstensinya
         $fileExt = explode('.', $fileName);
@@ -58,30 +62,25 @@ class BaseController extends Filter
                 if ($fileSize < 1000000) { // 1MB
                     // Beri nama baru yang unik pada file
                     $fileNameNew = uniqid('', true) . '.' . $fileActualExt;
-                    $fileDestination = BASEURL . "/public/images/barang/" . $fileNameNew;
+                    $fileDestination = __DIR__ . "/../../public/images/barang/" . $fileNameNew;
 
                     // Pindahkan file ke folder tujuan
-                    if (move_uploaded_file($fileTmpName, $fileDestination)) {
-                        // Jika berhasil, Anda bisa mengembalikan nama file baru atau path lengkapnya
+                    if (move_uploaded_file($fileTmpName, $fileDestination)) { // Jika berhasil, kembalikan nama file baru
                         return $fileNameNew;
-                    } else {
-                        // Jika terjadi kesalahan saat memindahkan file
+                    } else { // Jika terjadi kesalahan saat memindahkan file
                         echo "<script>alert('Terjadi kesalahan saat mengupload file');</script>";
                         return false;
                     }
-                } else {
-                    // Jika ukuran file terlalu besar
+                } else { // Jika ukuran file terlalu besar
                     echo "<script>alert('Ukuran file terlalu besar. Maksimal 1MB');</script>";
                     return false;
                 }
-            } else {
-                // Jika terjadi error pada file saat diupload
+            } else { // Jika terjadi error pada file saat diupload
                 echo "<script>alert('Terjadi kesalahan saat mengupload file');</script>";
                 return false;
             }
-        } else {
-            // Jika ekstensi file tidak diizinkan
-            echo "<script>alert('Format file tidak diizinkan. Hanya jpg, jpeg, png, dan pdf yang diizinkan');</script>";
+        } else { // Jika ekstensi file tidak diizinkan
+            echo "<script>alert('Format file tidak diizinkan. Hanya jpg, jpeg, png yang diizinkan');</script>";
             return false;
         }
     }

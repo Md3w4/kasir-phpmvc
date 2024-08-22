@@ -45,4 +45,9 @@ class BarangModel extends Database
             $data['id'],
         ]);
     }
+
+    public function delete($id){
+        $query = "DELETE barang WHERE id = ?";
+        return $this->qry($query, [$id]);
+    }
 }
