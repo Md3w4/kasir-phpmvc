@@ -8,12 +8,23 @@ class Routes
         $router->setDefaultController('DefaultApp');
         $router->setDefaultMethod('index');
 
+        $router->get('/login', ['AuthController', 'view']);
+        $router->post('/login', ['AuthController', 'login']);
+        $router->post('/logout', ['AuthController', 'logout']);
+
         $router->get('/barang', ['BarangController', 'index']);
         $router->get('/barang/insert', ['BarangController', 'insert']);
         $router->get('/barang/edit', ['BarangController', 'edit']);
+        $router->get('/barang/delete', ['BarangController', 'delete_barang']);
         $router->post('/barang/insert_barang', ['BarangController', 'insert_barang']);
-        $router->post('/barang/edit/(:id)', ['BarangController', 'edit_barang']);
-        $router->post('/barang/delete/(:id)', ['BarangController', 'delete_barang']);
+        $router->post('/barang/edit_barang', ['BarangController', 'edit_barang']);
+
+        $router->get('/pelanggan', ['PelangganController', 'index']);
+        $router->get('/pelanggan/insert', ['PelangganController', 'insert']);
+        $router->get('/pelanggan/edit', ['PelangganController', 'edit']);
+        $router->get('/pelanggan/delete', ['PelangganController', 'delete_pelanggan']);
+        $router->post('/pelanggan/insert_pelanggan', ['PelangganController', 'insert_pelanggan']);
+        $router->post('/pelanggan/edit_pelanggan', ['PelangganController', 'edit_pelanggan']);
 
         $router->get('/transaksi', ['TransaksiController', 'index']);
         $router->get('/transaksi/riwayat', ['TransaksiController', 'list']);

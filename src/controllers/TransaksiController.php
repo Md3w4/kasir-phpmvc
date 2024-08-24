@@ -7,7 +7,7 @@ class TransaksiController extends BaseController
     public function __construct()
     {
         $this->barangModel = $this->model('BarangModel');
-        $this->transaksiModel = $this->model('TransaksiModel');
+        $this->transaksiModel = $this->model('TransaksiModel'); 
     }
 
     public function index()

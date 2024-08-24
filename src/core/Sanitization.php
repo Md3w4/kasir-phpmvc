@@ -49,13 +49,16 @@ class Sanitization
         bool $trim = true
     ): array {
         if ($fields) {
+            $options = [];
             foreach ($fields as $key => $field) {
-                if ($field == "string" && isset($inputs[$key])) {
-                    $tempvar = strip_tags($inputs[$key]);
-                    $inputs[$key] = $tempvar;
+                // Ensure field is a valid key in filters array
+                if (isset($filters[trim($field)])) {
+                    $options[$key] = $filters[trim($field)];
+                } else {
+                    // Default filter if not explicitly defined
+                    $options[$key] = $default_filter;
                 }
             }
-            $options = array_map(fn($field) => $filters[trim($field)], $fields);
             $data = filter_var_array($inputs, $options);
         } else {
             $data = filter_var_array($inputs, $default_filter);

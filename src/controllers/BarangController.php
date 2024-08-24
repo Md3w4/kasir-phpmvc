@@ -44,6 +44,7 @@ class BarangController extends BaseController
             'harga_barang' => 'int|required|numeric|min:0',
             'stok_barang' => 'int|required|numeric|min:0',
             'kadaluarsa' => 'string',
+            'gambar' => 'uploaded|mimes:jpg,jpeg,png|max_size:1000000',
         ];
 
         $messages = [
@@ -70,8 +71,9 @@ class BarangController extends BaseController
                 'date' => 'Kadaluarsa harus berupa tanggal yang valid'
             ],
             'gambar' => [
-                'required' => 'Gambar barang wajib diisi',
-                'mimes' => 'Gambar harus berupa file dengan ekstensi .jpg, .jpeg, .png'
+                'uploaded' => 'Gambar barang wajib diisi',
+                'mimes' => 'Gambar harus berupa file dengan ekstensi .jpg, .jpeg, .png',
+                'max_size' => 'Ukuran file tidak boleh lebih dari 1MB',
             ],
         ];
 
@@ -82,7 +84,7 @@ class BarangController extends BaseController
             $this->redirect('barang/insert');
         }
 
-        // Proses unggah gambar
+        // Proses unggah gambar jika validasi berhasil
         $fileNameNew = $this->upload('gambar');
         if ($fileNameNew) {
             $inputs['gambar'] = $fileNameNew;
@@ -113,13 +115,13 @@ class BarangController extends BaseController
 
     public function edit_barang()
     {
-        $this->dd($_POST);
         $fields = [
             'kode_barang' => 'string|required|alpha_numeric',
             'nama_barang' => 'string|required|min:3|max:50',
             'harga_barang' => 'int|required|numeric|min:0',
             'stok_barang' => 'int|required|numeric|min:0',
             'kadaluarsa' => 'string',
+            'gambar' => 'uploaded|mimes:jpg,jpeg,png|max_size:1000000',
             'id' => 'int'
         ];
 
@@ -147,8 +149,9 @@ class BarangController extends BaseController
                 'date' => 'Kadaluarsa harus berupa tanggal yang valid'
             ],
             'gambar' => [
-                'required' => 'Gambar barang wajib diisi',
-                'mimes' => 'Gambar harus berupa file dengan ekstensi .jpg, .jpeg, .png'
+                'uploaded' => 'Gambar barang wajib diisi',
+                'mimes' => 'Gambar harus berupa file dengan ekstensi .jpg, .jpeg, .png',
+                'max_size' => 'Ukuran file tidak boleh lebih dari 1MB',
             ],
         ];
 
@@ -208,9 +211,9 @@ class BarangController extends BaseController
         }
 
         // Hapus data barang dari database
-        $result = $this->barangModel->delete($id);
+        $proc = $this->barangModel->delete($id);
 
-        if ($result) {
+        if ($proc) {
             Message::setFlash('success', 'Berhasil!', 'Barang berhasil dihapus.');
         } else {
             Message::setFlash('error', 'Gagal!', 'Barang gagal dihapus.');

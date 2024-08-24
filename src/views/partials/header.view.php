@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rippleui@1.12.1/dist/css/styles.css" />
     <link rel="stylesheet" href="<?= BASEURL . '/css/style.css' ?>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -80,6 +81,18 @@
                                         </div>
                                     </div>
                                 </li>
+                                <a href="/pelanggan">
+                                    <li class="menu-item <?= $this->urlIs('/pelanggan') ? "menu-active" : "" ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="opacity-75" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+                                        </svg>
+                                        <span>Pelanggan</span>
+                                    </li>
+                                </a>
                                 <!-- <li>
                                     <input type="checkbox" id="menu-1" class="menu-toggle" />
                                     <label class="menu-item justify-between" for="menu-1">
@@ -240,6 +253,9 @@
                 <div class="navbar-end flex items-center space-x-4">
                     <?php if ($this->urlIs('/barang')) : ?>
                         <a href="/barang/insert"><button class="btn"><i class="fa-solid fa-plus"></i><span class="ml-2">Tambah</span></button></a>
+                    <?php endif; ?>
+                    <?php if ($this->urlIs('/pelanggan')) : ?>
+                        <a href="/pelanggan/insert"><button class="btn"><i class="fa-solid fa-plus"></i><span class="ml-2">Tambah</span></button></a>
                     <?php endif; ?>
                     <?php if ($this->urlIs('/transaksi')) : ?>
                         <input type="checkbox" id="drawer-right" class="drawer-toggle" />
