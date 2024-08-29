@@ -121,9 +121,13 @@ class BarangController extends BaseController
             'harga_barang' => 'int|required|numeric|min:0',
             'stok_barang' => 'int|required|numeric|min:0',
             'kadaluarsa' => 'string',
-            'gambar' => 'uploaded|mimes:jpg,jpeg,png|max_size:1000000',
             'id' => 'int'
         ];
+
+        // Cek apakah ada file gambar baru yang diunggah
+        if ($_FILES['gambar']['error'] !== 4) {
+            $fields['gambar'] = 'uploaded|mimes:jpg,jpeg,png|max_size:1000000';
+        }
 
         $messages = [
             'kode_barang' => [
@@ -172,7 +176,7 @@ class BarangController extends BaseController
                 unlink(BASEURL . "/public/images/barang/" . $barangSebelumnya['gambar']);
             }
             // Upload gambar baru
-            $inputs['gambar'] = $this->upload($inputs);
+            $inputs['gambar'] = $this->upload('gambar');
             if (!$inputs['gambar']) {
                 Message::setFlash('error', 'Gagal!', 'Upload gambar gagal');
                 $this->redirect('barang/edit/' . $inputs['id']);
@@ -192,6 +196,7 @@ class BarangController extends BaseController
             $this->redirect('barang/edit/' . $inputs['id']);
         }
     }
+
 
     public function delete_barang($id)
     {

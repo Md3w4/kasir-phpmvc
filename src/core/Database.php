@@ -44,18 +44,20 @@ class Database
         return $stmt;
     }
 
-    public function get($params = array())
+    public function get($params = array(), $logic = 'AND')
     {
         $column = implode(",", $this->column);
         $query = "SELECT $column FROM {$this->tableName}";
         $paramValue = [];
+
         if (!empty($params)) {
             $query .= " WHERE 1=1 ";
             foreach ($params as $key => $value) {
-                $query .= " AND {$key} = ? ";
+                $query .= " {$logic} {$key} = ? ";
                 array_push($paramValue, $value);
             }
         }
+
         return $this->qry($query, $paramValue);
     }
 
@@ -70,7 +72,7 @@ class Database
         foreach ($data as $key => $value) {
             array_push($column, $key);
             array_push($columnValue, $value);
-            array_push($param, "?");    
+            array_push($param, "?");
         }
         $column = implode(", ", $column);
         $param = implode(", ", $param);

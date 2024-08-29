@@ -210,24 +210,23 @@
                     <div class="dropdown z-50 flex h-fit w-full cursor-pointer hover:bg-gray-4">
                         <label class="whites mx-2 flex h-fit w-full cursor-pointer p-0 hover:bg-gray-4" tabindex="0">
                             <div class="flex flex-row gap-4 p-4">
-                                <div class="avatar-square avatar avatar-md">
+                                <!-- <div class="avatar-square avatar avatar-md">
                                     <img src="https://i.pravatar.cc/150?img=30" alt="avatar" />
-                                </div>
-
+                                </div> -->
                                 <div class="flex flex-col">
-                                    <span>Sandra Marx</span>
-                                    <span class="text-xs font-normal text-content2">sandra</span>
+                                    <span><?= $_SESSION['user']['nama']; ?></span>
+                                    <span class="text-xs font-normal text-content2"><?= ucfirst($_SESSION['user']['role']); ?></span>
                                 </div>
                             </div>
                         </label>
                         <div class="dropdown-menu-right-top dropdown-menu ml-2">
                             <a class="dropdown-item text-sm">Profile</a>
-                            <a tabindex="-1" class="dropdown-item text-sm">Account settings</a>
+                            <!-- <a tabindex="-1" class="dropdown-item text-sm">Account settings</a>
                             <a tabindex="-1" class="dropdown-item text-sm">Change email</a>
                             <a tabindex="-1" class="dropdown-item text-sm">Subscriptions</a>
                             <a tabindex="-1" class="dropdown-item text-sm">Change password</a>
-                            <a tabindex="-1" class="dropdown-item text-sm">Refer a friend</a>
-                            <a tabindex="-1" class="dropdown-item text-sm">Settings</a>
+                            <a tabindex="-1" class="dropdown-item text-sm">Refer a friend</a> -->
+                            <a tabindex="-1" class="dropdown-item text-sm" href="/logout">Logout</a>
                         </div>
                     </div>
                 </section>

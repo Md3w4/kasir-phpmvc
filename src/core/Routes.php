@@ -8,9 +8,11 @@ class Routes
         $router->setDefaultController('DefaultApp');
         $router->setDefaultMethod('index');
 
-        $router->get('/login', ['AuthController', 'view']);
+        $router->get('/login', ['AuthController', 'showlogin']);
         $router->post('/login', ['AuthController', 'login']);
-        $router->post('/logout', ['AuthController', 'logout']);
+        $router->get('/logout', ['AuthController', 'logout']);
+        $router->get('/register', ['AuthController', 'showRegister']);
+        $router->post('/register', ['AuthController', 'register']);
 
         $router->get('/barang', ['BarangController', 'index']);
         $router->get('/barang/insert', ['BarangController', 'insert']);
